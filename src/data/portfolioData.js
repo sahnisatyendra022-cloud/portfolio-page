@@ -45,6 +45,9 @@ import p22_img2 from '../assets/images/QDDA2.webp';
 import p23_img1 from '../assets/images/PreH.webp';
 import p23_img2 from '../assets/images/PreH2.webp';
 import p24_img1 from '../assets/images/Sim2Real.webp';
+import deltaAi from '../assets/images/delta_ai.webp';
+import delta1 from '../assets/images/delta1.webp';
+import delta2 from '../assets/images/delta2.webp';
 
 export const PORTFOLIO_DATA = {
   profile: {
@@ -88,11 +91,14 @@ export const PORTFOLIO_DATA = {
     socials: { linkedin: "#", github: "#" }
   },
   skills: [
-    { category: "Core", items: ["Python (OOP)", "C++", "C"] },
-    { category: "Simulation", items: ["Isaac Sim", "Isaac Lab", "Ignition Gazebo","Pybullet"] },
-    { category: "Robotics", items: ["ROS 2 (Humble/Jazzy)", "Nav2", "RTAB-MAP", "MoveIt 2"] },
-    { category: "Tools", items: ["Git", "Linux", "Solidwork"] },
-    { category: "AI & CV", items: ["PyTorch", "YOLOv8", "OpenCV", "MediaPipe", "Reinforcement Learning"] }
+    { category: "Core", items: ["C++", "Python", "C", "Embedded C", "Linux", "Git"] },
+    { category: "Robotics", items: ["ROS 2 (Humble/Jazzy)", "Nav2", "MoveIt 2", "RTAB-Map", "TF/URDF", "SLAM", "Localization", "Motion Planning"] },
+    { category: "Motion & Controls", items: ["Forward/Inverse Kinematics", "Trajectory Planning", "PID Control", "Multi-Axis Motion Control", "Robot Workspace & Safety Limits"] },
+    { category: "Simulation", items: ["NVIDIA Isaac Sim", "Isaac Lab", "PyBullet", "Gazebo", "Reinforcement Learning (PPO)"] },
+    { category: "Perception & AI", items: ["LiDAR", "RGB-D Cameras", "IMU", "Encoders", "OpenCV", "YOLOv8", "MediaPipe", "Camera-to-Robot Calibration", "Sensor Fusion"] },
+    { category: "Embedded & Hardware", items: ["Teensy 4.1", "STM32", "ESP32/ESP8266", "Raspberry Pi", "PWM", "Motor/Servo Drivers", "PCB Design", "Control Panels"] },
+    { category: "Communication", items: ["UART", "I2C", "SPI", "CAN", "RS-485/Modbus", "BLE", "MQTT/HTTP"] },
+    { category: "Engineering Tools", items: ["SolidWorks", "STM32CubeIDE/CubeMX", "Keil", "Proteus", "easyEDA", "ST-Link"] }
   ],
   experience: [
     {
@@ -155,56 +161,27 @@ export const PORTFOLIO_DATA = {
   training: [
     {
       company: "Softpro India Computer Technologies",
-      course: "Internet of Things (Professional Certification)",
+      course: "Internet of Things (IoT)",
       period: "July 2024",
-      tasks: [
-        "IoT Stack & Architecture: Mastered the 4-layer IoT architecture, focusing on the integration of Perception, Network, Support, and Application layers.",
-        "Cloud Connectivity & Protocols: Implemented real-time data streaming to cloud platforms (like ThingSpeak or Firebase) using MQTT and HTTP protocols for remote monitoring.",
-        "Sensor Fusion & Data Acquisition: Configured multi-sensor arrays (DHT, Ultrasonic, IR) for precise data collection and noise filtering at the edge.",
-        "Embedded Programming: Developed low-power firmware for ESP32 and Arduino boards, enabling wireless communication (Wi-Fi/Bluetooth) for smart-home automation use cases.",
-        "System Prototyping: Gained hands-on experience in building end-to-end IoT pipelines, from hardware sensor interfacing to real-time dashboard visualization.",
-        "Technical Documentation: Created comprehensive system design reports and circuit schematics for scalable IoT node deployments."
-      ]
-    },
-    {
-      company: "ITI Limited, Mankapur (A Govt. of India Enterprise)",
-      course: "Advanced Embedded Systems & Real-Time OS (RTOS)",
-      period: "July 2019",
-      tasks: [
-        "RTOS Fundamentals: Studied the architecture of Real-Time Operating Systems, focusing on task scheduling, interrupt handling, and multi-threading for time-critical applications.",
-        "Microcontroller Mastery: Gained hands-on experience in interfacing 8051 and AVR microcontrollers with peripherals like LCDs, Keypads, and ADC/DAC modules.",
-        "Embedded C Programming: Developed firmware using Embedded C, implementing optimized memory management and hardware abstraction layers (HAL).",
-        "System Integration: Conducted debugging and testing of embedded circuits to ensure reliable communication between hardware components and the OS kernel.",
-        "Industrial Standards: Observed the large-scale manufacturing and assembly processes of telecommunication equipment, understanding industrial-grade quality control.",
-        "Protocol Implementation: Practiced low-level serial communication protocols including UART, I2C, and SPI for efficient data transfer between sensors and MCUs."
-      ]
+      description: "IoT architecture, ESP32/Arduino, sensor interfacing, MQTT/HTTP, and basic cloud connectivity."
     },
     {
       company: "Softpro India Computer Technologies",
-      course: "Advanced Internet of Things (IoT) & Embedded AI",
-      period: "Jan 2020",
-      tasks: [
-        "Comprehensive IoT Architecture: Studied the end-to-end flow of IoT systems, from edge devices and gateways to cloud-based data processing layers.",
-        "Hardware Expertise (ESP series): Developed firmware for ESP8266 and ESP32 to implement Wi-Fi based data logging and real-time remote actuator control.",
-        "Single Board Computing (Raspberry Pi): Configured Raspberry Pi environments for high-level tasks, including local web servers and data aggregation using Linux-based systems.",
-        "Python Programming for IoT: Mastered Python for automating data acquisition, processing sensor streams, and building communication scripts via MQTT and HTTP protocols.",
-        "Cloud & Connectivity: Integrated edge devices with cloud platforms for real-time visualization, utilizing both REST APIs and pub/sub messaging models.",
-        "Sensor Fusion & Integration: Interfaced a variety of digital and analog sensors (DHT, Ultrasonic, PIR) with microcontrollers to build responsive smart-city and home automation prototypes.",
-        "Contribution: Designed the logic for autonomous data reporting, performed hardware-software debugging, and optimized Python scripts for low-latency execution."
-      ]
+      course: "Python with IoT & Raspberry Pi",
+      period: "January 2020",
+      description: "Python programming, Raspberry Pi, IoT communication, sensor interfacing, and automation projects."
     },
     {
-      company: "ITI Limited, Mankapur (A Govt. of India Enterprise)",
-      course: "Advanced Embedded Systems & Real-Time OS (RTOS)",
+      company: "ITI Limited, Mankapur",
+      course: "Embedded Systems & OS",
       period: "July 2019",
-      tasks: [
-        "RTOS Fundamentals: Studied the architecture of Real-Time Operating Systems, focusing on task scheduling, interrupt handling, and multi-threading for time-critical applications.",
-        "Microcontroller Mastery: Gained hands-on experience in interfacing 8051 and AVR microcontrollers with peripherals like LCDs, Keypads, and ADC/DAC modules.",
-        "Embedded C Programming: Developed firmware using Embedded C, implementing optimized memory management and hardware abstraction layers (HAL).",
-        "System Integration: Conducted debugging and testing of embedded circuits to ensure reliable communication between hardware components and the OS kernel.",
-        "Industrial Standards: Observed the large-scale manufacturing and assembly processes of telecommunication equipment, understanding industrial-grade quality control.",
-        "Protocol Implementation: Practiced low-level serial communication protocols including UART, I2C, and SPI for efficient data transfer between sensors and MCUs."
-      ]
+      description: "Embedded C, microcontrollers, RTOS fundamentals, hardware interfacing, and UART/I2C/SPI communication."
+    },
+    {
+      company: "Softpro India Computer Technologies",
+      course: "PCB Design",
+      period: "July 2020",
+      description: "PCB design fundamentals, schematic development, and PCB layout."
     },
   ],
   education: [
@@ -217,14 +194,23 @@ export const PORTFOLIO_DATA = {
       title: "High-Speed Delta Robot: Vision-Guided Conveyor Pick & Place",
       category: "Industrial Robotics",
       tag: "Motion Control & System Integration",
-      img: null,
-      images: [],
+      img: deltaAi,
+      images: [deltaAi, delta1, delta2],
       videoData: [
         {
-          url: "https://www.youtube.com/embed/Xve4OhukGK0",
-          title: "Delta Robot Demonstration",
-          type: "YouTube Demo",
-          desc: "Temporary demonstration link. This can be replaced with the final Delta robot video later."
+          url: "https://youtube.com/shorts/LWshtHAi0Fo?si=ndrO4oZ1DFN7kvB8",
+          title: "Delta Robot Demonstration 1",
+          type: "YouTube Short"
+        },
+        {
+          url: "https://youtube.com/shorts/1Vjxv2wPW48?si=XP3qCNOEnb1Szivn",
+          title: "Delta Robot Demonstration 2",
+          type: "YouTube Short"
+        },
+        {
+          url: "https://youtube.com/shorts/DkPpCI2wjVc?si=cK7_La6zvvgBikPz",
+          title: "Delta Robot Demonstration 3",
+          type: "YouTube Short"
         }
       ],
       detailedDesc: [

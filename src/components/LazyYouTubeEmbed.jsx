@@ -18,6 +18,8 @@ const extractYouTubeVideoId = (rawUrl) => {
         candidate = url.searchParams.get('v');
       } else if (url.pathname.startsWith('/embed/')) {
         candidate = url.pathname.split('/')[2];
+      } else if (url.pathname.startsWith('/shorts/')) {
+        candidate = url.pathname.split('/')[2];
       }
     }
 

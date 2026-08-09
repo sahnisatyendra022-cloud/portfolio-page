@@ -31,3 +31,8 @@ lerna-debug.log*
 # Large local demo media (videos are hosted externally)
 QDD_A.mp4
 **/QDD_A.mp4
+
+# Original Delta media sources (optimized WebP versions are committed)
+src/assets/images/delta_ai.png
+src/assets/images/delta1.jpeg
+src/assets/images/delta2.jpeg

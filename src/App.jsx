@@ -64,15 +64,21 @@ export default function App() {
         {/* SKILLS SECTION */}
         <section id="skills" className="p-12 lg:p-24 border-t border-white/5">
           <h2 className="text-4xl font-extrabold mb-12 border-b-4 border-[#0ea5e9] inline-block pb-2">Technical Skills</h2>
-          <div className="grid md:grid-cols-2 gap-10 max-w-5xl">
-            {PORTFOLIO_DATA.skills.map((s, idx) => (
-              <div key={idx} className="flex gap-4">
-                <ChevronRight className="text-[#0ea5e9] shrink-0" />
-                <div className="flex gap-4 font-semibold">
-                  <span className="text-white min-w-[100px]">{s.category}:</span>
-                  <span className="text-gray-400 font-normal">{s.items.join(", ")}</span>
+          <div className="grid max-w-6xl gap-5 md:grid-cols-2">
+            {PORTFOLIO_DATA.skills.map((skill) => (
+              <article key={skill.category} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-[#0ea5e9]/30 hover:bg-white/[0.05]">
+                <div className="mb-4 flex items-center gap-2">
+                  <ChevronRight className="shrink-0 text-[#0ea5e9]" size={22} />
+                  <h3 className="text-lg font-bold text-white">{skill.category}</h3>
                 </div>
-              </div>
+                <div className="flex flex-wrap gap-2">
+                  {skill.items.map((item) => (
+                    <span key={item} className="rounded-lg border border-[#0ea5e9]/15 bg-[#0ea5e9]/10 px-3 py-1.5 text-xs font-medium text-gray-300">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
             ))}
           </div>
         </section>
@@ -121,19 +127,17 @@ export default function App() {
         {/* Training Section */}
         <section id="training" className="p-12 lg:p-24 border-t border-white/5 bg-[#010409]/40">
           <h2 className="text-4xl font-extrabold mb-12 border-b-4 border-[#0ea5e9] inline-block pb-2">Training & Certifications</h2>
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl">
-            {PORTFOLIO_DATA.training.map((t, idx) => (
-              <div key={idx} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#0ea5e9]/50 transition-all">
-                <h3 className="text-xl font-bold text-white">{t.course}</h3>
-                <p className="text-[#0ea5e9] text-sm font-semibold mb-3">{t.company} | {t.period}</p>
-                <ul className="space-y-1">
-                  {t.tasks.map((task, i) => (
-                    <li key={i} className="text-gray-400 text-sm flex gap-2">
-                      <span className="text-[#0ea5e9]">▹</span> {task}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <div className="grid max-w-6xl gap-6 md:grid-cols-2">
+            {PORTFOLIO_DATA.training.map((training, index) => (
+              <article key={`${training.course}-${training.period}`} className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-7 transition-colors hover:border-[#0ea5e9]/40 hover:bg-white/[0.05]">
+                <span className="absolute right-5 top-4 text-4xl font-black text-white/[0.04]">{String(index + 1).padStart(2, '0')}</span>
+                <h3 className="relative mb-2 pr-10 text-xl font-bold text-white">{training.course}</h3>
+                <p className="relative mb-4 text-sm font-semibold text-[#0ea5e9]">{training.company} | {training.period}</p>
+                <p className="relative flex gap-2 text-sm leading-relaxed text-gray-400">
+                  <ChevronRight className="mt-0.5 shrink-0 text-[#0ea5e9]" size={18} />
+                  <span>{training.description}</span>
+                </p>
+              </article>
             ))}
           </div>
         </section>
