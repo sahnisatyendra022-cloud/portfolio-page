@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { motion as Motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { motion as Motion, useMotionValue, useSpring } from 'framer-motion';
 import { ChevronRight, Mail } from 'lucide-react';
 
 // Particles Animation Imports
@@ -17,6 +17,7 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [typedText, setTypedText] = useState('');
   const [init, setInit] = useState(false);
+  const closeProject = useCallback(() => setSelectedProject(null), []);
 
   // 1. Particles Engine Initialize (Background Lines ke liye)
   useEffect(() => {
@@ -37,30 +38,53 @@ export default function App() {
   const phrases = useMemo(() => ["ROS 2", "AI & Robotics", "SLAM Expert"], []);
   
   useEffect(() => {
-    let i = 0, j = 0, isDeleting = false;
+    let phraseIndex = 0;
+    let characterIndex = 0;
+    let isDeleting = false;
+    let timerId;
+
     const type = () => {
-      const currentPhrase = phrases[i];
-      setTypedText(isDeleting ? currentPhrase.substring(0, j - 1) : currentPhrase.substring(0, j + 1));
-      j = isDeleting ? j - 1 : j + 1;
-      
-      if (!isDeleting && j === currentPhrase.length) {
-        setTimeout(() => isDeleting = true, 2000);
-      } else if (isDeleting && j === 0) {
-        isDeleting = false;
-        i = (i + 1) % phrases.length;
+      const currentPhrase = phrases[phraseIndex];
+      let delay = 100;
+
+      if (!isDeleting) {
+        characterIndex += 1;
+        setTypedText(currentPhrase.slice(0, characterIndex));
+
+        if (characterIndex === currentPhrase.length) {
+          isDeleting = true;
+          delay = 2000;
+        }
+      } else {
+        characterIndex -= 1;
+        setTypedText(currentPhrase.slice(0, characterIndex));
+        delay = 50;
+
+        if (characterIndex === 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          delay = 350;
+        }
       }
-      setTimeout(type, isDeleting ? 50 : 100);
+
+      timerId = window.setTimeout(type, delay);
     };
-    const timer = setTimeout(type, 100);
-    return () => clearTimeout(timer);
+
+    timerId = window.setTimeout(type, 100);
+    return () => window.clearTimeout(timerId);
   }, [phrases]);
 
   return (
-    <div className="min-h-screen bg-[#010409] text-[#e6edf3] relative overflow-hidden" 
-         onMouseMove={(e) => { mouseX.set(e.clientX); mouseY.set(e.clientY); }}>
+    <div
+      className="min-h-screen bg-[#010409] text-[#e6edf3] relative overflow-hidden"
+      onMouseMove={selectedProject ? undefined : (e) => {
+        mouseX.set(e.clientX);
+        mouseY.set(e.clientY);
+      }}
+    >
       
       {/* BACKGROUND ANIMATION: Connectivity Lines */}
-      {init && (
+      {init && !selectedProject && (
         <Particles
           id="tsparticles"
           className="absolute inset-0 z-0"
@@ -83,10 +107,12 @@ export default function App() {
       )}
 
       {/* Mouse Glow Effect */}
-      <Motion.div 
-        className="fixed top-0 left-0 w-[600px] h-[600px] bg-[#0ea5e9]/10 blur-[120px] rounded-full pointer-events-none z-1"
-        style={{ x: smoothX, y: smoothY, translateX: "-50%", translateY: "-50%" }} 
-      />
+      {!selectedProject && (
+        <Motion.div
+          className="fixed top-0 left-0 w-[600px] h-[600px] bg-[#0ea5e9]/10 blur-[120px] rounded-full pointer-events-none z-1"
+          style={{ x: smoothX, y: smoothY, translateX: "-50%", translateY: "-50%" }}
+        />
+      )}
 
       <Sidebar activeSection={activeSection} />
 
@@ -216,9 +242,7 @@ export default function App() {
       </main>
 
       {/* Project Detail Modal */}
-      <AnimatePresence>
-        {selectedProject && <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />}
-      </AnimatePresence>
+      {selectedProject && <ProjectModal project={selectedProject} onClose={closeProject} />}
     </div>
   );
 }
