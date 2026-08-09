@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion as Motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 
 const ProjectCard = ({ project, onClick }) => {
@@ -8,10 +7,9 @@ const ProjectCard = ({ project, onClick }) => {
   const showImage = Boolean(project.img) && !imageFailed;
 
   return (
-    <Motion.article
-      whileHover={{ y: -10 }}
-      className="bg-[#0d1117] border border-[#30363d] rounded-2xl overflow-hidden group cursor-pointer"
-      onClick={onClick}
+    <article
+      className="group cursor-pointer overflow-hidden rounded-2xl border border-[#30363d] bg-[#0d1117] transition-transform duration-200 hover:-translate-y-2"
+      onClick={() => onClick(project)}
     >
       <div className="aspect-video relative overflow-hidden bg-black">
         {showImage ? (
@@ -41,8 +39,8 @@ const ProjectCard = ({ project, onClick }) => {
         <h3 className="text-xl font-bold text-white mt-3 mb-1">{project.title}</h3>
         <p className="text-gray-500 text-sm line-clamp-2">{project.desc}</p>
       </div>
-    </Motion.article>
+    </article>
   );
 };
 
-export default ProjectCard;
+export default React.memo(ProjectCard);

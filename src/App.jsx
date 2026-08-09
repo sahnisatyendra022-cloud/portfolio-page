@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { motion as Motion, useMotionValue, useSpring } from 'framer-motion';
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion as Motion } from 'framer-motion';
 import { ChevronRight, Mail } from 'lucide-react';
 
 // Particles Animation Imports
@@ -11,13 +11,14 @@ import { PORTFOLIO_DATA } from './data/portfolioData';
 import Sidebar from './components/Sidebar';
 import ProjectCard from './components/ProjectCard';
 import ProjectModal from './components/ProjectModal';
+import TypingText from './components/TypingText';
 
 export default function App() {
   const [activeSection] = useState('home');
   const [selectedProject, setSelectedProject] = useState(null);
-  const [typedText, setTypedText] = useState('');
   const [init, setInit] = useState(false);
   const closeProject = useCallback(() => setSelectedProject(null), []);
+  const openProject = useCallback((project) => setSelectedProject(project), []);
 
   // 1. Particles Engine Initialize (Background Lines ke liye)
   useEffect(() => {
@@ -28,79 +29,29 @@ export default function App() {
     });
   }, []);
 
-  // 2. Mouse Glow Logic
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const smoothX = useSpring(mouseX, { damping: 25, stiffness: 150 });
-  const smoothY = useSpring(mouseY, { damping: 25, stiffness: 150 });
-
-  // 3. Typing Animation Logic
-  const phrases = useMemo(() => ["ROS 2", "AI & Robotics", "SLAM Expert"], []);
-  
-  useEffect(() => {
-    let phraseIndex = 0;
-    let characterIndex = 0;
-    let isDeleting = false;
-    let timerId;
-
-    const type = () => {
-      const currentPhrase = phrases[phraseIndex];
-      let delay = 100;
-
-      if (!isDeleting) {
-        characterIndex += 1;
-        setTypedText(currentPhrase.slice(0, characterIndex));
-
-        if (characterIndex === currentPhrase.length) {
-          isDeleting = true;
-          delay = 2000;
-        }
-      } else {
-        characterIndex -= 1;
-        setTypedText(currentPhrase.slice(0, characterIndex));
-        delay = 50;
-
-        if (characterIndex === 0) {
-          isDeleting = false;
-          phraseIndex = (phraseIndex + 1) % phrases.length;
-          delay = 350;
-        }
-      }
-
-      timerId = window.setTimeout(type, delay);
-    };
-
-    timerId = window.setTimeout(type, 100);
-    return () => window.clearTimeout(timerId);
-  }, [phrases]);
-
   return (
-    <div
-      className="min-h-screen bg-[#010409] text-[#e6edf3] relative overflow-hidden"
-      onMouseMove={selectedProject ? undefined : (e) => {
-        mouseX.set(e.clientX);
-        mouseY.set(e.clientY);
-      }}
-    >
+    <div className="min-h-screen bg-[#010409] text-[#e6edf3] relative overflow-hidden">
       
       {/* BACKGROUND ANIMATION: Connectivity Lines */}
       {init && !selectedProject && (
         <Particles
           id="tsparticles"
-          className="absolute inset-0 z-0"
+          className="pointer-events-none fixed inset-0 z-0 h-screen w-screen overflow-hidden"
           options={{
-            fpsLimit: 30,
+            fullScreen: { enable: false },
+            detectRetina: false,
+            pauseOnBlur: true,
+            fpsLimit: 18,
             interactivity: {
-              events: { onHover: { enable: true, mode: "grab" } },
-              modes: { grab: { distance: 140, links: { opacity: 0.8 } } },
+              events: { onHover: { enable: false } },
             },
             particles: {
               color: { value: "#1606f3ff" },
-              links: { color: "#2109f7ff", distance: 140, enable: true, opacity: 0.35, width: 1 },
-              move: { enable: true, speed: 0.8 },
-              number: { density: { enable: true, area: 900 }, value: 40 },
-              opacity: { value: 0.8 },
-              size: { value: { min: 2, max: 4 } },
+              links: { color: "#2109f7ff", distance: 150, enable: true, opacity: 0.25, width: 1 },
+              move: { enable: true, speed: 0.45 },
+              number: { density: { enable: true, area: 1400 }, value: 14 },
+              opacity: { value: 0.65 },
+              size: { value: { min: 1, max: 3 } },
             },
           }}
         />
@@ -108,10 +59,7 @@ export default function App() {
 
       {/* Mouse Glow Effect */}
       {!selectedProject && (
-        <Motion.div
-          className="fixed top-0 left-0 w-[600px] h-[600px] bg-[#0ea5e9]/10 blur-[120px] rounded-full pointer-events-none z-1"
-          style={{ x: smoothX, y: smoothY, translateX: "-50%", translateY: "-50%" }}
-        />
+        <div className="pointer-events-none fixed -right-32 -top-32 z-1 h-80 w-80 rounded-full bg-[#0ea5e9]/10 blur-3xl" />
       )}
 
       <Sidebar activeSection={activeSection} />
@@ -128,7 +76,7 @@ export default function App() {
             SATYENDRA
           </Motion.h1>
           <p className="text-xl lg:text-3xl font-medium text-gray-400 mt-4">
-            Expert in <span className="text-[#0ea5e9] border-b-2 border-[#0ea5e9]">{typedText}</span>
+            Expert in <TypingText />
           </p>
         </section>
 
@@ -225,7 +173,7 @@ export default function App() {
           <h2 className="text-4xl font-extrabold mb-12 border-b-4 border-[#0ea5e9] inline-block pb-2">Featured Projects</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {PORTFOLIO_DATA.projects.map((proj) => (
-              <ProjectCard key={proj.id} project={proj} onClick={() => setSelectedProject(proj)} />
+              <ProjectCard key={proj.id} project={proj} onClick={openProject} />
             ))}
           </div>
         </section>
