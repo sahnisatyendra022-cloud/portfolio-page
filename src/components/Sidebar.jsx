@@ -3,7 +3,7 @@ import { Home, User, Briefcase, Rocket, Cpu, GraduationCap, Mail, Linkedin, Gith
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 
 // 1. Apni local image ko yahan import karein
-import profileImg from '../assets/profile1.jpg'; 
+import profileImg from '../assets/images/New_profile.jpeg';
 
 const Sidebar = ({ activeSection }) => (
   <aside className="fixed left-0 top-0 w-72 h-screen bg-[#030a1c] border-r border-[#30363d] z-50 hidden lg:flex flex-col p-8 items-center text-center overflow-y-auto">
@@ -14,6 +14,9 @@ const Sidebar = ({ activeSection }) => (
       <img 
         src={profileImg} 
         alt="Satyendra" 
+        decoding="async"
+        width="112"
+        height="112"
         className="w-full h-full rounded-full object-cover" 
       />
     </div>
