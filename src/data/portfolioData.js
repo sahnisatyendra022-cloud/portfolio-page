@@ -50,12 +50,40 @@ export const PORTFOLIO_DATA = {
   profile: {
     name: "Satyendra",
     title: "Robotics & AI Engineer",
-    bio: "Robotics and embedded systems engineer building complete robotic products from simulation and electronics to firmware, vision, motion control, SDKs, and real-world deployment.",
-    details: [
-      "Developing high-speed Delta robot systems for conveyor-based vision-guided pick and place.",
-      "Experienced in ROS 2, autonomous navigation, SLAM, manipulation, and simulation-to-real workflows.",
-      "Hands-on with embedded firmware, AC servo systems, sensors, PCB design, control panels, and industrial communication.",
-      "Building complete robot control SDKs and deploying robotics workloads on NVIDIA Jetson platforms."
+    bio: "Robotics and embedded systems engineer with 3+ years of hands-on robotics development experience and broader experience in embedded product development. I work across robot software, motion control, embedded firmware, electronics, simulation, perception, and system integration. My work ranges from ROS 2-based robotic applications and autonomous navigation simulation to high-speed vision-guided industrial robots and embedded control systems.",
+    highlights: [
+      {
+        title: "Robotics System Development",
+        description: "Designing and integrating robotic systems across software, firmware, electronics, sensors, motion control, and mechanical interfaces, with end-to-end technical ownership of a high-speed Delta robot system."
+      },
+      {
+        title: "Motion Planning & Controls",
+        description: "Hands-on experience with forward/inverse kinematics, trajectory planning, synchronized multi-axis motion, PID-based control concepts, workspace limits, fault handling, and robot motion-control firmware."
+      },
+      {
+        title: "ROS 2 & Autonomous Robotics",
+        description: "Experience with ROS 2, Nav2, RTAB-Map, TF/URDF, localization, SLAM, mapping, and navigation workflows. Developed and validated AMR mapping and navigation systems in NVIDIA Isaac Sim using simulated 3D LiDAR data."
+      },
+      {
+        title: "Simulation & Digital Twins",
+        description: "Experience with NVIDIA Isaac Sim, Isaac Lab, PyBullet, and Gazebo for robotic-arm manipulation, reinforcement learning, robot simulation, kinematics, navigation, and controller validation."
+      },
+      {
+        title: "Embedded & Electronics",
+        description: "Hands-on experience with Teensy 4.1, STM32, ESP32, Raspberry Pi, embedded C, PCB design, control electronics, motor/servo drivers, control panels, and hardware bring-up."
+      },
+      {
+        title: "Vision & Perception",
+        description: "Worked with camera-based object detection, YOLO/OpenCV, RGB-D cameras, LiDAR, IMU, encoders, camera-to-robot calibration, sensor integration, and conveyor tracking for robotic applications."
+      },
+      {
+        title: "Industrial Robot Integration",
+        description: "Built a complete vision-guided Delta robot system involving custom motion-control firmware, electronics, PCB, AC servo integration, robot SDK, camera calibration, conveyor tracking, and system-level commissioning."
+      },
+      {
+        title: "Cross-Functional Engineering",
+        description: "Worked across mechanical, electronics, firmware, software, and vision teams during robotic-system development, integration, debugging, and design changes."
+      }
     ],
     socials: { linkedin: "#", github: "#" }
   },
@@ -99,26 +127,28 @@ export const PORTFOLIO_DATA = {
 
     {
       company: "XPRT Enforcement Pvt. Ltd.",
-      role: "Embedded System Engineer",
+      role: "Embedded & Robotics R&D Consultant / Contract",
       period: "August 2022 – February 2023",
-      tasks: ["End-to-End Product Development: Designed and prototyped IoT-based embedded systems, including circuit design, PCB layouting, and hands-on SMD component assembly.",
-        "Traffic Enforcement Systems: Contributed to 'Speedo Soft'—an AI-driven device for detecting triple-riding, helmet-less driving, and seatbelt violations using ANPR (Automatic Number Plate Recognition).",
-        "Sensor Integration: Developed firmware for advanced systems including Dual-Battery Intelligent Power Management, Radar-based speed detection, and breath analyzer modules.",
-        "Hardware R&D: Managed the complete hardware lifecycle from schematic capture to physical PCB printing and rigorous validation of electronic modules.",
-        "Smart Vehicle Telematics: Integrated GPS and Radar data modules for real-time vehicle tracking and violation logging in smart traffic environments.",
-        "System Architecture: Documented comprehensive technical reports and architecture for scalable IoT deployments in municipal traffic management."]
+      tasks: [
+        "GPS & Radar Telematics: Integrated GPS and radar data modules for real-time vehicle tracking and telematics applications.",
+        "Real-Time Vehicle Tracking: Worked on embedded hardware/data integration for collecting vehicle location and radar-related information for real-time monitoring.",
+        "Embedded System Integration: Integrated multiple hardware/data modules into the vehicle telematics system and worked on the interaction between embedded components and the overall IoT system.",
+        "Municipal IoT Architecture: Authored technical architecture documentation and system-level reports for scalable municipal IoT deployment.",
+        "System Documentation: Documented hardware/software interaction, communication flow, system structure, and deployment requirements for the telematics solution."
+      ]
     },
-      {
+    {
       company: "Experio Traffiko System Pvt. Ltd.",
-      role: "Embedded Systems & IoT Engineer", 
+      role: "Embedded Engineer",
       period: "November 2020 – October 2021",
       tasks: [
-        "End-to-End Product Development: Designed and prototyped IoT-based embedded systems, including circuit design, PCB layouting, and hands-on SMD component assembly.",
-        "Traffic Enforcement Systems: Contributed to 'Speedo Soft'—an AI-driven device for detecting triple-riding, helmet-less driving, and seatbelt violations using ANPR (Automatic Number Plate Recognition).",
-        "Sensor Integration: Developed firmware for advanced systems including Dual-Battery Intelligent Power Management, Radar-based speed detection, and breath analyzer modules.",
-        "Hardware R&D: Managed the complete hardware lifecycle from schematic capture to physical PCB printing and rigorous validation of electronic modules.",
-        "Smart Vehicle Telematics: Integrated GPS and Radar data modules for real-time vehicle tracking and violation logging in smart traffic environments.",
-        "System Architecture: Documented comprehensive technical reports and architecture for scalable IoT deployments in municipal traffic management."
+        "Speedo Soft — Traffic Enforcement: Worked on the embedded hardware and electronics side of Speedo Soft, an AI-driven traffic-enforcement system using ANPR-based violation detection for triple-riding, helmet-less driving, and seatbelt violations.",
+        "Embedded Hardware Development: Designed circuits, developed PCB layouts, performed SMD assembly, and worked through the hardware development cycle from schematic to assembled and validated PCB.",
+        "Radar Speed Detection: Developed embedded firmware for radar-based vehicle speed detection and integrated the radar module with the controller hardware.",
+        "Dual-Battery Power Management: Developed the embedded control logic for an intelligent dual-battery power-management system for reliable power-source handling.",
+        "Breath Analyzer: Developed firmware and hardware integration for the breath-analyzer module used in the traffic-enforcement system.",
+        "Hardware Validation: Performed hardware bring-up, troubleshooting, testing, and validation of electronic modules during product development.",
+        "Embedded Product Development: Worked across circuit design, PCB, firmware, hardware assembly, and validation rather than only a single software/hardware component."
       ]
     },
   ],

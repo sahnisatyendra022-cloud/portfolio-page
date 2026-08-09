@@ -1,10 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion as Motion } from 'framer-motion';
 import { ChevronRight, Mail } from 'lucide-react';
-
-// Particles Animation Imports
-import { Particles, initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim"; 
 
 // Aapke Components aur Data
 import { PORTFOLIO_DATA } from './data/portfolioData';
@@ -16,46 +12,14 @@ import TypingText from './components/TypingText';
 export default function App() {
   const [activeSection] = useState('home');
   const [selectedProject, setSelectedProject] = useState(null);
-  const [init, setInit] = useState(false);
   const closeProject = useCallback(() => setSelectedProject(null), []);
   const openProject = useCallback((project) => setSelectedProject(project), []);
-
-  // 1. Particles Engine Initialize (Background Lines ke liye)
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
-  }, []);
 
   return (
     <div className="min-h-screen bg-[#010409] text-[#e6edf3] relative overflow-hidden">
       
-      {/* BACKGROUND ANIMATION: Connectivity Lines */}
-      {init && !selectedProject && (
-        <Particles
-          id="tsparticles"
-          className="pointer-events-none fixed inset-0 z-0 h-screen w-screen overflow-hidden"
-          options={{
-            fullScreen: { enable: false },
-            detectRetina: false,
-            pauseOnBlur: true,
-            fpsLimit: 18,
-            interactivity: {
-              events: { onHover: { enable: false } },
-            },
-            particles: {
-              color: { value: "#1606f3ff" },
-              links: { color: "#2109f7ff", distance: 150, enable: true, opacity: 0.25, width: 1 },
-              move: { enable: true, speed: 0.45 },
-              number: { density: { enable: true, area: 1400 }, value: 14 },
-              opacity: { value: 0.65 },
-              size: { value: { min: 1, max: 3 } },
-            },
-          }}
-        />
-      )}
+      {/* Static network background: no canvas, animation loop, or long-running GPU work. */}
+      {!selectedProject && <div className="portfolio-static-background" aria-hidden="true" />}
 
       {/* Mouse Glow Effect */}
       {!selectedProject && (
@@ -83,10 +47,16 @@ export default function App() {
         {/* ABOUT SECTION */}
         <section id="about" className="p-12 lg:p-24 border-t border-white/5 bg-[#010409]/60 backdrop-blur-md">
            <h2 className="text-4xl font-extrabold mb-10 border-b-4 border-[#0ea5e9] inline-block pb-2">About</h2>
-           <p className="text-gray-400 text-lg leading-relaxed max-w-4xl mb-10">{PORTFOLIO_DATA.profile.bio}</p>
-           <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
-              {PORTFOLIO_DATA.profile.details.map((d, i) => (
-                <div key={i} className="flex gap-3 text-gray-400"><span className="text-[#0ea5e9]">▹</span>{d}</div>
+           <p className="mb-12 max-w-5xl text-lg leading-relaxed text-gray-300">{PORTFOLIO_DATA.profile.bio}</p>
+           <div className="grid max-w-6xl gap-5 md:grid-cols-2">
+              {PORTFOLIO_DATA.profile.highlights.map((highlight) => (
+                <article key={highlight.title} className="flex gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-[#0ea5e9]/30 hover:bg-white/[0.05]">
+                  <ChevronRight className="mt-1 shrink-0 text-[#0ea5e9]" size={22} />
+                  <div>
+                    <h3 className="mb-2 text-lg font-bold text-white">{highlight.title}</h3>
+                    <p className="text-sm leading-relaxed text-gray-400">{highlight.description}</p>
+                  </div>
+                </article>
               ))}
            </div>
         </section>
