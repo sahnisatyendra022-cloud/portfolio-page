@@ -5,7 +5,7 @@ import Sidebar from './components/Sidebar';
 import ProjectCard from './components/ProjectCard';
 import ProjectModal from './components/ProjectModal';
 import useHashNavigation from './hooks/useHashNavigation';
-import resumePdf from './assets/documents/satyendra_resume_r.pdf';
+import resumePdf from './assets/documents/Satyendra_resume.pdf';
 
 const FEATURED_PROJECT_IDS = [25, 1, 23, 22, 21, 20, 19, 18, 17, 24, 16, 15, 14];
 
