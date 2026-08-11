@@ -51,8 +51,8 @@ import delta2 from '../assets/images/delta2.webp';
 
 export const PORTFOLIO_DATA = {
   profile: {
-    name: "Satyendra",
-    title: "Robotics & AI Engineer",
+    name: "Satyendra Sahni",
+    title: "Robotics Systems Engineer",
     bio: "Robotics and embedded systems engineer with 3+ years of hands-on robotics development experience and broader experience in embedded product development. I work across robot software, motion control, embedded firmware, electronics, simulation, perception, and system integration. My work ranges from ROS 2-based robotic applications and autonomous navigation simulation to high-speed vision-guided industrial robots and embedded control systems.",
     highlights: [
       {
@@ -88,7 +88,10 @@ export const PORTFOLIO_DATA = {
         description: "Worked across mechanical, electronics, firmware, software, and vision teams during robotic-system development, integration, debugging, and design changes."
       }
     ],
-    socials: { linkedin: "#", github: "#" }
+    socials: {
+      linkedin: null,
+      github: "https://github.com/sahnisatyendra022-cloud"
+    }
   },
   skills: [
     { category: "Core", items: ["C++", "Python", "C", "Embedded C", "Linux", "Git"] },
@@ -121,13 +124,12 @@ export const PORTFOLIO_DATA = {
       role: "Robotics Engineer",
       period: "December 2024 – February 2026",
       tasks: [
-        "Advanced Manipulation: 14+ months of expertise in Robotic Arm simulation, transitioning from PyBullet's physics-based environments to high-fidelity NVIDIA Isaac Sim workflows.",
-        "Isaac Sim Expert: Developing complex manipulation scenes using RMPflow and MoveIt 2 for multi-DOF arms, focusing on obstacle avoidance and optimal trajectory planning.",
-        "Autonomous Navigation: Building end-to-end navigation stacks for AMRs using Nav2, integrating 3D LiDAR and RGB-D cameras for dynamic obstacle negotiation.",
-        "3D SLAM & Localization: Implementing RTAB-Map with ICP-based odometry on 3D LiDAR data, fine-tuning loop closure and graph optimization to eliminate localization drift.",
-        "Simulation-to-Real (S2R): Validating robot URDFs and controller stability in Isaac Sim before deployment on Jetson Orin Nano, ensuring consistent TF Tree performance.",
-        "Kinematics & Control: Developing custom Forward and Inverse Kinematics (IK) solvers and integrating force-feedback gripper logic for delicate pick-and-place tasks.",
-        "System Optimization: Architecting ROS 2 nodes and launch configurations on Edge devices, managing real-time data flow between sensors (LiDAR/Camera) and the navigation stack."
+        "Robotic Arm Simulation: Developed robotic-arm manipulation and controller-validation workflows using PyBullet and NVIDIA Isaac Sim.",
+        "AMR Mapping & Navigation: Developed and validated ROS 2 AMR mapping and navigation workflows in NVIDIA Isaac Sim using simulated 3D LiDAR data. Real-robot hardware validation was outside the project scope.",
+        "ROS 2 Integration: Configured ROS 2 nodes, launch files, TF/URDF models, and simulation bridges for repeatable robotics workflows.",
+        "SLAM & Localization: Worked with RTAB-Map, LiDAR-based mapping, localization, and Nav2 planning workflows in simulation.",
+        "Motion Planning: Developed and tested forward/inverse kinematics, trajectory-planning, and manipulation workflows for robotic arms.",
+        "Simulation Validation: Used repeatable simulation tests to evaluate robot models, sensor data flow, navigation behavior, and controller integration."
       ]
     },
 
@@ -191,9 +193,27 @@ export const PORTFOLIO_DATA = {
   projects: [
     {
       id: 25,
+      slug: "delta-robot",
       title: "High-Speed Delta Robot: Vision-Guided Conveyor Pick & Place",
       category: "Industrial Robotics",
       tag: "Motion Control & System Integration",
+      role: "End-to-End Technical Ownership",
+      summary: "End-to-end development of a high-speed vision-guided Delta robot for conveyor-based moving-object pick-and-place, covering motion-control firmware, electronics, servo integration, kinematics, vision calibration and PC-side robot control software.",
+      collaborationNote: "Delivered the electronics, embedded firmware, control integration, camera interface and robot SDK while collaborating with the mechanical design team on robot structure and mechanical interfaces.",
+      contributions: [
+        "System-control architecture",
+        "Teensy 4.1 firmware",
+        "Custom Delta inverse kinematics",
+        "Synchronized multi-axis motion",
+        "Absolute-position handling",
+        "AC servo and encoder integration",
+        "Interface PCB and control-panel integration",
+        "RS-485/Modbus diagnostics",
+        "Camera-to-robot calibration interface",
+        "Conveyor tracking",
+        "Robot SDK",
+        "Fault recovery and safety sequencing"
+      ],
       img: deltaAi,
       images: [deltaAi, delta1, delta2],
       videoData: [
@@ -925,3 +945,35 @@ export const PORTFOLIO_DATA = {
     },
   ]
 };
+
+const PROJECT_PRESENTATION = {
+  1: { slug: "rl-robotic-arm", role: "RL Environment & Training Development" },
+  2: { slug: "lidar-data-acquisition", role: "Embedded Systems Development" },
+  3: { slug: "obstacle-avoiding-robot", role: "Robot Control & Hardware Integration" },
+  4: { slug: "line-follower-robot", role: "Robot Control & Hardware Integration" },
+  5: { slug: "wifi-controlled-car", role: "IoT & Embedded Integration" },
+  6: { slug: "vehicle-speed-distance-monitoring", role: "Sensor & Embedded Integration" },
+  7: { slug: "dual-battery-power-management", role: "Embedded Control Development" },
+  8: { slug: "breath-analyzer", role: "Firmware & Hardware Integration" },
+  9: { slug: "smart-toll-tax", role: "Embedded Application Development" },
+  11: { slug: "emergency-light-tracking", role: "Embedded & IoT Integration" },
+  12: { slug: "plant-monitoring", role: "IoT System Development" },
+  13: { slug: "home-automation", role: "IoT Control Development" },
+  14: { slug: "amr-2d-navigation", role: "ROS 2 Navigation Simulation" },
+  15: { slug: "ackermann-3d-navigation", role: "ROS 2 Navigation Simulation" },
+  16: { slug: "autonomous-amr", role: "ROS 2 Simulation & Navigation Development" },
+  17: { slug: "robot-arm-pick-place", role: "Robot Simulation Development" },
+  18: { slug: "biped-robot", role: "Locomotion Simulation & Control" },
+  19: { slug: "ai-gesture-control", role: "Vision & Gesture-Control Development" },
+  20: { slug: "hybrid-gesture-control", role: "Sensor & Vision Integration" },
+  21: { slug: "vision-pick-place", role: "Vision & Robot Integration" },
+  22: { slug: "qdd-actuator", role: "Actuator Design, Electronics & Control" },
+  23: { slug: "humanoid-hand", role: "Robotics Software & Control Development" },
+  24: { slug: "pybullet-sim-to-real", role: "Simulation & Control Integration" },
+  25: { slug: "delta-robot", role: "End-to-End Technical Ownership" },
+};
+
+PORTFOLIO_DATA.projects.forEach((project) => {
+  Object.assign(project, PROJECT_PRESENTATION[project.id]);
+  project.summary ??= project.detailedDesc?.[0] ?? project.title;
+});

@@ -1,67 +1,136 @@
-import React from 'react';
-import { Home, User, Briefcase, Rocket, Cpu, GraduationCap, Mail, Linkedin, Github } from 'lucide-react';
+import React, { useState } from 'react';
+import {
+  Briefcase,
+  Cpu,
+  Github,
+  GraduationCap,
+  Home,
+  Mail,
+  Menu,
+  Rocket,
+  User,
+  X,
+} from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
-
-// 1. Apni local image ko yahan import karein
 import profileImg from '../assets/images/New_profile.jpeg';
 
-const Sidebar = ({ activeSection }) => (
-  <aside className="fixed left-0 top-0 w-72 h-screen bg-[#030a1c] border-r border-[#30363d] z-50 hidden lg:flex flex-col p-8 items-center text-center overflow-y-auto">
-    
-    {/* Profile Image Section */}
-    <div className="w-28 h-28 rounded-full border-4 border-[#0ea5e9] p-1 shadow-lg shadow-sky-500/20 mb-4 overflow-hidden bg-black">
-      {/* 2. src me profileImg variable ka use kiya gaya hai */}
-      <img 
-        src={profileImg} 
-        alt="Satyendra" 
-        decoding="async"
-        width="112"
-        height="112"
-        className="w-full h-full rounded-full object-cover" 
-      />
-    </div>
+const NAV_ITEMS = [
+  { id: 'home', icon: Home, label: 'Home' },
+  { id: 'projects', icon: Rocket, label: 'Projects' },
+  { id: 'experience', icon: Briefcase, label: 'Experience' },
+  { id: 'about', icon: User, label: 'About' },
+  { id: 'skills', icon: Cpu, label: 'Skills' },
+  { id: 'education', icon: GraduationCap, label: 'Education' },
+  { id: 'contact', icon: Mail, label: 'Contact' },
+];
 
-    <h1 className="text-xl font-extrabold text-white mb-1 uppercase tracking-tight">
-      {PORTFOLIO_DATA.profile.name}
-    </h1>
-    <p className="text-[#0ea5e9] text-[10px] font-bold uppercase tracking-widest mb-6">
-      {PORTFOLIO_DATA.profile.title}
-    </p>
-    
-    <nav className="w-full space-y-1 mb-8">
-      {[
-        { id: 'home', icon: Home, label: 'Home' },
-        { id: 'about', icon: User, label: 'About' },
-        { id: 'skills', icon: Cpu, label: 'Skills' },
-        { id: 'experience', icon: Briefcase, label: 'Experience' },
-        { id: 'education', icon: GraduationCap, label: 'Education' },
-        { id: 'projects', icon: Rocket, label: 'Projects' },
-        { id: 'contact', icon: Mail, label: 'Contact' }
-      ].map((item) => (
-        <a 
-          key={item.id} 
-          href={`#${item.id}`} 
-          className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all ${
-            activeSection === item.id 
-              ? 'bg-sky-500/10 text-[#0ea5e9]' 
+function Navigation({ activeSection, onNavigate }) {
+  return (
+    <nav aria-label="Primary navigation" className="w-full space-y-1">
+      {NAV_ITEMS.map((item) => (
+        <a
+          key={item.id}
+          href={`#${item.id}`}
+          onClick={(event) => {
+            event.preventDefault();
+            onNavigate(item.id);
+          }}
+          aria-current={activeSection === item.id ? 'page' : undefined}
+          className={`flex min-h-11 items-center gap-3 rounded-lg px-4 py-2 transition-colors ${
+            activeSection === item.id
+              ? 'bg-sky-500/10 text-[#0ea5e9]'
               : 'text-gray-400 hover:bg-white/5 hover:text-white'
           }`}
         >
-          <item.icon size={18} />
-          <span className="font-semibold text-xs">{item.label}</span>
+          <item.icon size={18} aria-hidden="true" />
+          <span className="text-xs font-semibold">{item.label}</span>
         </a>
       ))}
     </nav>
+  );
+}
 
-    <div className="mt-auto pt-6 border-t border-white/5 w-full flex justify-center gap-4">
-      <a href={PORTFOLIO_DATA.profile.socials.linkedin} className="text-gray-500 hover:text-[#0ea5e9]">
-        <Linkedin size={18} />
-      </a>
-      <a href={PORTFOLIO_DATA.profile.socials.github} className="text-gray-500 hover:text-white">
-        <Github size={18} />
-      </a>
-    </div>
-  </aside>
-);
+export default function Sidebar({ activeSection, onNavigate }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const githubUrl = PORTFOLIO_DATA.profile.socials.github;
 
-export default Sidebar;
+  const handleNavigate = (sectionId) => {
+    setMenuOpen(false);
+    onNavigate(sectionId);
+  };
+
+  return (
+    <>
+      <header className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-[#30363d] bg-[#030a1c]/95 px-4 lg:hidden">
+        <button
+          type="button"
+          className="flex min-h-11 items-center gap-3 text-left"
+          onClick={() => handleNavigate('home')}
+          aria-label="Go to home"
+        >
+          <img
+            src={profileImg}
+            alt="Satyendra Sahni"
+            decoding="async"
+            width="40"
+            height="40"
+            className="h-10 w-10 rounded-full border-2 border-[#0ea5e9] object-cover"
+          />
+          <span className="text-sm font-extrabold uppercase tracking-wide text-white">Satyendra Sahni</span>
+        </button>
+        <button
+          type="button"
+          className="grid min-h-11 min-w-11 place-items-center rounded-lg text-white hover:bg-white/10"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        >
+          {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+        </button>
+      </header>
+
+      {menuOpen && (
+        <div id="mobile-navigation" className="fixed inset-x-0 top-16 z-50 border-b border-[#30363d] bg-[#030a1c] p-4 shadow-2xl lg:hidden">
+          <Navigation activeSection={activeSection} onNavigate={handleNavigate} />
+        </div>
+      )}
+
+      <aside className="fixed left-0 top-0 z-50 hidden h-screen w-72 flex-col items-center overflow-y-auto border-r border-[#30363d] bg-[#030a1c] p-8 text-center lg:flex">
+        <div className="mb-4 h-28 w-28 overflow-hidden rounded-full border-4 border-[#0ea5e9] bg-black p-1 shadow-lg shadow-sky-500/20">
+          <img
+            src={profileImg}
+            alt="Satyendra Sahni"
+            decoding="async"
+            width="112"
+            height="112"
+            className="h-full w-full rounded-full object-cover"
+          />
+        </div>
+
+        <p className="mb-1 text-xl font-extrabold uppercase tracking-tight text-white">
+          {PORTFOLIO_DATA.profile.name}
+        </p>
+        <p className="mb-6 text-[10px] font-bold uppercase tracking-widest text-[#0ea5e9]">
+          {PORTFOLIO_DATA.profile.title}
+        </p>
+
+        <Navigation activeSection={activeSection} onNavigate={handleNavigate} />
+
+        <div className="mt-auto flex w-full justify-center gap-4 border-t border-white/5 pt-6">
+          {githubUrl && (
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Satyendra Sahni's GitHub profile"
+              className="grid min-h-11 min-w-11 place-items-center text-gray-500 hover:text-white"
+            >
+              <Github size={20} aria-hidden="true" />
+            </a>
+          )}
+        </div>
+      </aside>
+    </>
+  );
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const PHRASES = ['ROS 2', 'AI & Robotics', 'SLAM Expert'];
+const PHRASES = ['ROS 2', 'AI & Robotics', 'SLAM & Navigation'];
 const MAX_COMPLETED_PHRASES = PHRASES.length * 2;
 const FINAL_TEXT = 'AI & Robotics';
 
