@@ -89,7 +89,7 @@ export const PORTFOLIO_DATA = {
       }
     ],
     socials: {
-      linkedin: null,
+      linkedin: "https://www.linkedin.com/in/satyendra-sahni-54b8a31b1/",
       github: "https://github.com/sahnisatyendra022-cloud"
     }
   },

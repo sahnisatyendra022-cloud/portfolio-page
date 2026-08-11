@@ -5,6 +5,7 @@ import {
   Github,
   GraduationCap,
   Home,
+  Linkedin,
   Mail,
   Menu,
   Rocket,
@@ -53,6 +54,7 @@ function Navigation({ activeSection, onNavigate }) {
 export default function Sidebar({ activeSection, onNavigate }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const githubUrl = PORTFOLIO_DATA.profile.socials.github;
+  const linkedinUrl = PORTFOLIO_DATA.profile.socials.linkedin;
 
   const handleNavigate = (sectionId) => {
     setMenuOpen(false);
@@ -74,7 +76,7 @@ export default function Sidebar({ activeSection, onNavigate }) {
             decoding="async"
             width="40"
             height="40"
-            className="h-10 w-10 rounded-full border-2 border-[#0ea5e9] object-cover"
+            className="aspect-square h-10 w-10 shrink-0 rounded-full border-2 border-[#0ea5e9] object-cover object-top"
           />
           <span className="text-sm font-extrabold uppercase tracking-wide text-white">Satyendra Sahni</span>
         </button>
@@ -93,18 +95,42 @@ export default function Sidebar({ activeSection, onNavigate }) {
       {menuOpen && (
         <div id="mobile-navigation" className="fixed inset-x-0 top-16 z-50 border-b border-[#30363d] bg-[#030a1c] p-4 shadow-2xl lg:hidden">
           <Navigation activeSection={activeSection} onNavigate={handleNavigate} />
+          <div className="mt-4 flex gap-2 border-t border-white/5 pt-3">
+            {linkedinUrl && (
+              <a
+                href={linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn Profile"
+                className="grid min-h-11 min-w-11 place-items-center rounded-lg text-gray-400 hover:bg-white/5 hover:text-[#0ea5e9]"
+              >
+                <Linkedin size={20} aria-hidden="true" />
+              </a>
+            )}
+            {githubUrl && (
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open Satyendra Sahni's GitHub profile"
+                className="grid min-h-11 min-w-11 place-items-center rounded-lg text-gray-400 hover:bg-white/5 hover:text-white"
+              >
+                <Github size={20} aria-hidden="true" />
+              </a>
+            )}
+          </div>
         </div>
       )}
 
       <aside className="fixed left-0 top-0 z-50 hidden h-screen w-72 flex-col items-center overflow-y-auto border-r border-[#30363d] bg-[#030a1c] p-8 text-center lg:flex">
-        <div className="mb-4 h-28 w-28 overflow-hidden rounded-full border-4 border-[#0ea5e9] bg-black p-1 shadow-lg shadow-sky-500/20">
+        <div className="mb-4 aspect-square h-28 w-28 shrink-0 overflow-hidden rounded-full border-4 border-[#0ea5e9] bg-black p-1 shadow-lg shadow-sky-500/20">
           <img
             src={profileImg}
             alt="Satyendra Sahni"
             decoding="async"
             width="112"
             height="112"
-            className="h-full w-full rounded-full object-cover"
+            className="aspect-square h-full w-full rounded-full object-cover object-top"
           />
         </div>
 
@@ -118,6 +144,17 @@ export default function Sidebar({ activeSection, onNavigate }) {
         <Navigation activeSection={activeSection} onNavigate={handleNavigate} />
 
         <div className="mt-auto flex w-full justify-center gap-4 border-t border-white/5 pt-6">
+          {linkedinUrl && (
+            <a
+              href={linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
+              className="grid min-h-11 min-w-11 place-items-center text-gray-500 hover:text-[#0ea5e9]"
+            >
+              <Linkedin size={20} aria-hidden="true" />
+            </a>
+          )}
           {githubUrl && (
             <a
               href={githubUrl}

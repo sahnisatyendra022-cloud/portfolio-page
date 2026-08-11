@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { ArrowRight, ChevronRight, Download, Github, Mail } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { ArrowLeft, ArrowRight, ChevronRight, Download, FolderOpen, Github, Mail } from 'lucide-react';
 import { PORTFOLIO_DATA } from './data/portfolioData';
 import Sidebar from './components/Sidebar';
 import ProjectCard from './components/ProjectCard';
@@ -7,7 +7,7 @@ import ProjectModal from './components/ProjectModal';
 import useHashNavigation from './hooks/useHashNavigation';
 import resumePdf from './assets/documents/satyendra_resume_r.pdf';
 
-const FEATURED_PROJECT_IDS = [25, 16, 1, 23, 22, 21];
+const FEATURED_PROJECT_IDS = [25, 1, 23, 22, 21, 20, 19, 18, 17, 24, 16, 15, 14];
 
 function SectionHeading({ eyebrow, children, description }) {
   return (
@@ -20,7 +20,6 @@ function SectionHeading({ eyebrow, children, description }) {
 }
 
 export default function App() {
-  const [showAllProjects, setShowAllProjects] = useState(false);
   const projects = PORTFOLIO_DATA.projects;
   const { activeSection, selectedProject, navigateToSection, openProject, closeProject } = useHashNavigation(projects);
 
@@ -33,7 +32,6 @@ export default function App() {
     [projects],
   );
   const deltaProject = projects.find((project) => project.slug === 'delta-robot');
-  const visibleOtherProjects = showAllProjects ? otherProjects : otherProjects.slice(0, 6);
 
   return (
     <div className="relative min-h-screen overflow-x-clip bg-[#010409] text-[#e6edf3]">
@@ -41,20 +39,19 @@ export default function App() {
       <Sidebar activeSection={activeSection} onNavigate={navigateToSection} />
 
       <main className="relative z-10 pt-16 lg:ml-72 lg:pt-0">
-        <section id="home" className="section-shell flex min-h-[calc(100svh-4rem)] items-center lg:min-h-screen">
-          <div className="grid w-full items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]">
-            <div>
-              <p className="mb-5 text-xs font-black uppercase tracking-[0.24em] text-[#0ea5e9]">Robotics Systems Engineer</p>
-              <h1 className="max-w-4xl text-5xl font-black leading-[0.95] tracking-tight text-white sm:text-7xl xl:text-8xl">
+        <section id="home" className="section-shell flex min-h-[calc(100svh-4rem)] items-center justify-center lg:min-h-screen">
+          <div className="hero-reveal mx-auto w-full max-w-6xl text-center">
+              <p className="mb-5 text-xs font-black uppercase tracking-[0.24em] text-[#0ea5e9] sm:text-sm">Robotics Systems Engineer</p>
+              <h1 className="text-5xl font-black leading-[0.95] tracking-tight text-white sm:text-7xl xl:text-8xl">
                 SATYENDRA <span className="text-[#0ea5e9]">SAHNI</span>
               </h1>
-              <p className="mt-6 max-w-3xl text-sm font-semibold leading-relaxed text-sky-200 sm:text-base">
-                Motion Control • ROS 2 • Embedded Systems • Vision Integration • Robotics System Development
+              <p className="mx-auto mt-6 max-w-4xl text-sm font-semibold leading-relaxed text-sky-200 sm:text-base">
+                Motion Control • ROS 2 • Embedded Systems • Vision Integration • System Integration
               </p>
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-gray-300 sm:text-lg">
-                I build complete robotic systems across motion-control firmware, electronics, kinematics, perception and real-hardware integration.
+              <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-gray-300 sm:text-lg">
+                Building complete robotic systems across firmware, electronics, kinematics, perception and real-hardware integration.
               </p>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
                 <a
                   href="#project-delta-robot"
                   onClick={(event) => {
@@ -64,6 +61,16 @@ export default function App() {
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#0ea5e9] px-6 py-3 font-bold text-white hover:bg-sky-400"
                 >
                   View Delta Robot <ArrowRight size={18} aria-hidden="true" />
+                </a>
+                <a
+                  href="#projects"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    navigateToSection('projects');
+                  }}
+                  className="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/15 px-6 py-3 font-bold text-white hover:border-sky-400/60 hover:bg-white/5"
+                >
+                  View Robotics Projects
                 </a>
                 <a
                   href="#experience"
@@ -83,36 +90,25 @@ export default function App() {
                   <Download size={18} aria-hidden="true" /> Download Resume
                 </a>
               </div>
-            </div>
-
-            {deltaProject?.img && (
-              <button
-                type="button"
-                onClick={() => openProject(deltaProject)}
-                className="group relative mx-auto w-full max-w-md overflow-hidden rounded-3xl border border-sky-400/20 bg-[#0d1117] text-left shadow-2xl shadow-sky-950/40"
-                aria-label="Open the Delta robot case study"
-              >
-                <img
-                  src={deltaProject.img}
-                  alt="Satyendra Sahni's high-speed Delta robot project"
-                  width="640"
-                  height="480"
-                  decoding="async"
-                  fetchPriority="high"
-                  className="aspect-[4/3] w-full object-cover"
-                />
-                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/75 to-transparent p-6 pt-16 text-sm font-bold text-white">
-                  Flagship Project — High-Speed Vision-Guided Delta Robot
-                </span>
-              </button>
-            )}
           </div>
         </section>
 
         <section id="projects" className="section-shell border-t border-white/5 bg-[#010409]/70">
-          <SectionHeading eyebrow="Selected Work" description="A focused selection of robotics systems spanning industrial motion control, ROS 2 navigation, simulation, actuation and perception.">
-            Featured Projects
-          </SectionHeading>
+          <div className="mb-10 flex flex-col items-start justify-between gap-5 lg:flex-row lg:items-end">
+            <SectionHeading eyebrow="Selected Work" description="Robotics, manipulation, navigation, control, simulation and perception projects.">
+              Featured Robotics Projects
+            </SectionHeading>
+            <a
+              href="#other-projects"
+              onClick={(event) => {
+                event.preventDefault();
+                navigateToSection('other-projects');
+              }}
+              className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl border border-sky-400/30 bg-sky-400/[0.07] px-5 py-3 font-bold text-sky-200 hover:bg-sky-400/15"
+            >
+              <FolderOpen size={19} aria-hidden="true" /> Other Projects
+            </a>
+          </div>
           <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
             {featuredProjects.map((project) => (
               <ProjectCard key={project.id} project={project} onClick={openProject} featured />
@@ -198,24 +194,26 @@ export default function App() {
         </section>
 
         <section id="other-projects" className="section-shell border-t border-white/5">
-          <SectionHeading eyebrow="Project Archive" description="Additional embedded, IoT, robotics and simulation work retained from the complete portfolio.">
-            Other Projects
-          </SectionHeading>
+          <div className="mb-10 flex flex-col items-start justify-between gap-5 lg:flex-row lg:items-end">
+            <SectionHeading eyebrow="Project Archive" description="Additional embedded, IoT and electronics projects retained from the complete portfolio.">
+              Other Projects
+            </SectionHeading>
+            <a
+              href="#projects"
+              onClick={(event) => {
+                event.preventDefault();
+                navigateToSection('projects');
+              }}
+              className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl border border-white/15 px-5 py-3 font-bold text-white hover:border-sky-400/50 hover:bg-white/5"
+            >
+              <ArrowLeft size={18} aria-hidden="true" /> Back to Featured Robotics Projects
+            </a>
+          </div>
           <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
-            {visibleOtherProjects.map((project) => (
+            {otherProjects.map((project) => (
               <ProjectCard key={project.id} project={project} onClick={openProject} />
             ))}
           </div>
-          {otherProjects.length > 6 && (
-            <button
-              type="button"
-              onClick={() => setShowAllProjects((visible) => !visible)}
-              className="mt-9 min-h-12 rounded-xl border border-sky-400/30 px-6 py-3 font-bold text-sky-300 hover:bg-sky-400/10"
-              aria-expanded={showAllProjects}
-            >
-              {showAllProjects ? 'Show Fewer Projects' : `Show All ${otherProjects.length} Projects`}
-            </button>
-          )}
         </section>
 
         <section id="contact" className="section-shell border-t border-white/5 bg-[#030a1c]/70 text-center">
