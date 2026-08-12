@@ -90,7 +90,8 @@ export const PORTFOLIO_DATA = {
     ],
     socials: {
       linkedin: "https://www.linkedin.com/in/satyendra-sahni-54b8a31b1/",
-      github: "https://github.com/sahnisatyendra022-cloud"
+      github: "https://github.com/sahnisatyendra022-cloud",
+      whatsapp: "https://wa.me/916392591438"
     }
   },
   skills: [
@@ -262,7 +263,7 @@ export const PORTFOLIO_DATA = {
           url: "https://www.youtube.com/embed/rc3EDOIQOiY", 
           title: "Massively Parallel Training", 
           type: "Reinforcement Learning", 
-          desc: "Training multiple robotic arm agents simultaneously using NVIDIA Isaac Gym to accelerate policy convergence." 
+          desc: "Training multiple robotic arm agents simultaneously using NVIDIA Isaac Lab to accelerate policy convergence."
         },
         { 
           url: "https://www.youtube.com/embed/KXtaNST_glo",
@@ -271,14 +272,14 @@ export const PORTFOLIO_DATA = {
         }
       ],
       detailedDesc: [
-        "Leveraged NVIDIA Isaac Sim and Isaac Gym for massively parallel Reinforcement Learning (RL) training of a robotic arm.",
+        "Leveraged NVIDIA Isaac Sim and Isaac Lab for massively parallel Reinforcement Learning (RL) training of a robotic arm.",
         "Implemented the Proximal Policy Optimization (PPO) algorithm to train the agent for complex manipulation tasks like reaching and precise object grasping.",
         "Configured a high-dimensional observation space including joint positions, velocities, and end-effector distance to the target.",
         "Performed Model Inference Testing by deploying the trained .pt/.onnx weights back into the simulation to validate success rates and behavior robustness.",
         "Utilized the Isaac Sim-to-ROS 2 bridge to test the trained policy's compatibility with standard robotics communication protocols.",
         "Contribution: Designed the reward function logic, managed the training environment setup, and optimized hyperparameters for faster convergence."
       ],
-      techStack: ["NVIDIA Isaac Sim", "Isaac Gym", "PyTorch", "Reinforcement Learning (PPO)", "Python", "ROS 2"]
+      techStack: ["NVIDIA Isaac Sim", "Isaac Lab", "PyTorch", "Reinforcement Learning (PPO)", "Python", "ROS 2"]
     },
   
 

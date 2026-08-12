@@ -10,6 +10,7 @@ import {
   Menu,
   Rocket,
   User,
+  MessageCircle,
   X,
 } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
@@ -55,6 +56,7 @@ export default function Sidebar({ activeSection, onNavigate }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const githubUrl = PORTFOLIO_DATA.profile.socials.github;
   const linkedinUrl = PORTFOLIO_DATA.profile.socials.linkedin;
+  const whatsappUrl = PORTFOLIO_DATA.profile.socials.whatsapp;
 
   const handleNavigate = (sectionId) => {
     setMenuOpen(false);
@@ -118,6 +120,17 @@ export default function Sidebar({ activeSection, onNavigate }) {
                 <Github size={20} aria-hidden="true" />
               </a>
             )}
+            {whatsappUrl && (
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Connect with Satyendra Sahni on WhatsApp"
+                className="grid min-h-11 min-w-11 place-items-center rounded-lg text-gray-400 hover:bg-white/5 hover:text-green-400"
+              >
+                <MessageCircle size={20} aria-hidden="true" />
+              </a>
+            )}
           </div>
         </div>
       )}
@@ -164,6 +177,17 @@ export default function Sidebar({ activeSection, onNavigate }) {
               className="grid min-h-11 min-w-11 place-items-center text-gray-500 hover:text-white"
             >
               <Github size={20} aria-hidden="true" />
+            </a>
+          )}
+          {whatsappUrl && (
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Connect with Satyendra Sahni on WhatsApp"
+              className="grid min-h-11 min-w-11 place-items-center text-gray-500 hover:text-green-400"
+            >
+              <MessageCircle size={20} aria-hidden="true" />
             </a>
           )}
         </div>

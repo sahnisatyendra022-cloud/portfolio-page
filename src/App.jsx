@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { ArrowLeft, ArrowRight, ChevronRight, Download, FolderOpen, Github, Mail } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronRight, Download, FolderOpen, Github, Mail, MessageCircle } from 'lucide-react';
 import { PORTFOLIO_DATA } from './data/portfolioData';
 import Sidebar from './components/Sidebar';
 import ProjectCard from './components/ProjectCard';
@@ -7,7 +7,7 @@ import ProjectModal from './components/ProjectModal';
 import useHashNavigation from './hooks/useHashNavigation';
 import resumePdf from './assets/documents/Satyendra_resume.pdf';
 
-const FEATURED_PROJECT_IDS = [25, 1, 23, 22, 21, 20, 19, 18, 17, 24, 16, 15, 14];
+const FEATURED_PROJECT_IDS = [25, 1, 18, 17, 24, 16, 15, 14, 23, 22, 21, 20, 19 ];
 
 function SectionHeading({ eyebrow, children, description }) {
   return (
@@ -231,6 +231,15 @@ export default function App() {
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/15 px-8 py-3 font-bold text-white hover:border-sky-400/60"
             >
               <Github size={19} aria-hidden="true" /> GitHub
+            </a>
+            <a
+              href={PORTFOLIO_DATA.profile.socials.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Connect with Satyendra Sahni on WhatsApp"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-green-400/30 px-8 py-3 font-bold text-green-300 hover:bg-green-400/10"
+            >
+              <MessageCircle size={19} aria-hidden="true" /> WhatsApp
             </a>
           </div>
         </section>
